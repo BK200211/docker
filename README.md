@@ -1,21 +1,34 @@
-# GESTION PRODUITS
+# Gestion des Produits
 
-## Prérequis
-Cette application est compatible `PHP5` et a été testée avec une base de données `MySQL 5.7`.
-
-## Installation
-- Copier les fichiers du dossier `www` dans un dossier accessible par le serveur Web.
-- Assurez vous que le dossier `uploads` est accessible en lecture et écriture par le serveur Web : `chmod 777 uploads`
-- Importez la base de données test à partir du dump SQL `database/gestion_produits.sql`.
-- Connectez vous à l'application avec l'url adaptée avec les informations suivantes :
-    - Login : `admin`
-    - Mot de passe : `password`
+Ce projet est une application web de gestion de produits, développée en utilisant Docker et PHP.
 
 ## Fonctionnalités
-L'application permet de :
-- Lister les produits
-- Afficher la fiche produit en lecture seule
-- Ajouter des produits
-- Modifier les produits
-- Supprimer les produits
-- Pour chaque produit, il est possible d'ajouter autant de photos que nécessaire
+
+- Ajouter, modifier et supprimer des produits avec des informations détaillées.
+- Gestion des ressources telles que les images associées aux produits.
+
+## Configuration Requise
+
+- Docker
+- Composeur (pour les dépendances PHP)
+
+## Installation
+
+1. Clonez le dépôt : `git clone https://github.com/BK200211/docker.git`
+2. Accédez au répertoire : `cd gestion-produits`
+3. Lancez l'application : `docker-compose up -d --build`
+
+L'application sera disponible à l'adresse [http://localhost:8081](http://localhost:8081).
+
+## Utilisation
+
+1. Accédez à l'interface web à l'adresse [http://localhost:8081](http://localhost:8081).
+2. Utilisez les fonctionnalités intuitives pour gérer vos produits.
+
+## Auteur
+
+Kovachev Boris
+
+Excusez-moi de ne pas avoir pu tout restaurer des fonctionnalités du TP que j'avais fait avant.
+
+Merci beaucoup pour votre lecture.
