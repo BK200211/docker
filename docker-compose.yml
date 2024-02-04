@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  php:
+    build: 
+      context: ./
+      dockerfile: Dockerfile # Assurez-vous que le nom correspond
+    image: php_docker:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=gestion_produits
+      - DB_USER=root
+      - DB_PASSWORD=rootpwd
+      - DB_PORT=3306
+
+  mysql:
+    build: 
+      context: ./database
+      dockerfile: Dockerfile # Assurez-vous que le nom correspond
+    image: mysql_docker:latest
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpwd
+
