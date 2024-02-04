@@ -1,25 +1,38 @@
-[onClick] {
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+[onClick], button {
     cursor: pointer;
 }
 
 .description {
-    font-size: 0.8em;
+    font-size: 1rem;
+    line-height: 1.5;
     text-align: justify;
+    color: #555;
 }
 
 div > header {
     font-weight: bold;
-    margin-bottom: 5px;
-    margin-top: 10px;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
 }
 
 .badge.prix {
     font-size: 1.3em;
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
 }
 
 img.thumb {
     height: 200px;
     margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
 }
 
 div.description {
@@ -41,4 +54,10 @@ div.img img.icon.trash {
     right: 10px;
     top: 10px;
     cursor: pointer;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease-in-out;
+}
+
+div.img:hover img.icon.trash {
+    filter: grayscale(0%);
 }
