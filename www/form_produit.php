@@ -1,23 +1,26 @@
 <?php
-    session_start();
-    include 'connect.php';
-    include 'fonctions.php';
-    secu();
+session_start();
+include 'connect.php';
+include 'fonctions.php';
+secu();
 
-    if (isset($_GET['id'])) {
-        $action = "modification";
-        $PRO_id = mysqli_real_escape_string($link,$_GET['id']);
+$action = "ajout";
+$produit = array(); // Initialize $produit as an empty array
 
-        $sql = "SELECT * FROM produits WHERE PRO_id = $PRO_id";
-        $res = mysqli_query($link,$sql);
-        if (mysqli_num_rows($res) == 0) {
-            header('Location: home.php');
-        } else {
-            $produit = mysqli_fetch_assoc($res);
-        }
+if (isset($_GET['id'])) {
+    $action = "modification";
+    $PRO_id = mysqli_real_escape_string($link, $_GET['id']);
+
+    $sql = "SELECT * FROM produits WHERE PRO_id = $PRO_id";
+    $res = mysqli_query($link, $sql);
+
+    if (mysqli_num_rows($res) == 0) {
+        header('Location: home.php');
+        exit; // Add exit after redirect
     } else {
-        $action = "ajout";
+        $produit = mysqli_fetch_assoc($res);
     }
+}
 
 ?><!DOCTYPE html>
 <html lang="fr">
@@ -25,7 +28,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gestion des produits</title>
+    <title>Gestion</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="fonctions.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -47,18 +50,18 @@
 
 
             <div class="form-group">
-                <label for="PRO_lib">Libellé</label>
-                <input type="text" class="form-control" id="PRO_lib" name="PRO_lib" value="<?php echo $produit['PRO_lib'] ?>" required>
+                <label for="PRO_lib">Nom du produit</label>
+                <input type="text" class="form-control" id="PRO_lib" name="PRO_lib" value="<?php echo isset($produit['PRO_lib']) ? $produit['PRO_lib'] : ''; ?>" required>
             </div>
 
             <div class="form-group">
-                <label for="PRO_description">Description</label>
-                <textarea class="form-control" id="PRO_description" name="PRO_description" rows="10"><?php echo $produit['PRO_description'] ?></textarea>
+                <label for="PRO_description">Description pour le produit</label>
+                <textarea class="form-control" id="PRO_description" name="PRO_description" rows="10"><?php echo isset($produit['PRO_description']) ? $produit['PRO_description'] : ''; ?></textarea>
             </div>
 
             <div class="form-group">
                 <label for="PRO_prix">Prix (€)</label>
-                <input type="number" class="form-control text-right" id="PRO_prix" name="PRO_prix" value="<?php echo $produit['PRO_prix'] ?>" step="0.01" min="0" required>
+                <input type="number" class="form-control text-right" id="PRO_prix" name="PRO_prix" value="<?php echo isset($produit['PRO_prix']) ? $produit['PRO_prix'] : ''; ?>" step="0.01" min="0" required>
             </div>
 
             <div class="form-group">
@@ -87,7 +90,7 @@
             </div>
 
             <div class="form-group" style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-warning">Enregistrer</button>
+                    <button type="submit" class="btn btn-warning">Enregistrer le nouveau produit</button>
                      <?php
                         if ($action == 'modification') {
                     ?>
@@ -106,7 +109,7 @@
         $('img.icon.trash').click(function() {
             if(confirm("Etes-vous sûr de vouloir supprimer cette photo?")) {
                 var RE_id = $(this).attr('data-id');
-                
+
                 request = $.ajax({
                     method: "POST",
                     url: "validation.php",
@@ -124,7 +127,7 @@
         });
 
         $('button.delete').click(function() {
-            
+
             if(confirm("Etes-vous sûr de vouloir supprimer ce produit?")) {
                 var PRO_id = $('#PRO_id').val();
 

@@ -14,7 +14,7 @@
         <h1>Gestion des produits</h1>
         <form action="auth.php" method="post">
             <div class="form-group">
-                <label for="US_login">Login</label>
+                <label for="US_login">Nom d'utilisateur</label>
                 <input type="text" id="US_login" name="US_login" class="form-control" value="">
             </div>
             <div class="form-group">
